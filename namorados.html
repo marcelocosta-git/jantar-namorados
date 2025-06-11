@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Dia dos Namorados!</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden; /* Evita barras de rolagem desnecessárias */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Garante que o body ocupe toda a altura da tela */
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            display: flex; /* Para alinhar os vídeos lado a lado */
+        }
+
+        .video-background video {
+            min-width: 50%; 
+            min-height: 50%;
+            width: auto;
+            height: auto;
+            opacity: 0.7; /* Opacidade reduzida */
+            filter: brightness(0.8); /* Escurece um pouco para o texto se destacar */
+            object-fit: cover; /* Garante que o vídeo cubra o espaço */
+        }
+
+        #initial-message {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 2.5em; /* Tamanho maior para a mensagem inicial */
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            transition: opacity 4s ease-out;
+            z-index: 10;
+        }
+
+        .menu-container {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 390px; /* Limita a largura do cardápio em telas maiores */
+            width: 90%; /* Ajusta a largura para telas menores */   
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            opacity: 0; /* Começa invisível */
+            transform: translateY(20px); /* Começa um pouco abaixo */
+            transition: opacity 3s ease-in;
+            position: absolute; /* Para ficar no centro */
+            top: 50%;
+            left: 50%;
+            z-index: 5;
+        }
+
+        .menu-container.show {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+        }
+
+        .menu-container h2 {
+            text-align: center;
+            color: #ffb6c1; /* Cor rosa claro para os títulos do cardápio */
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .menu-container h3 {
+            color: #b7ddff; /* Cor azul claro para os tópicos */
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            text-align: center;
+        }
+
+        .menu-container ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        .menu-container li {
+            margin-bottom: 8px;
+            font-size: 1em;
+            line-height: 0.8;
+        }
+
+        /* Responsividade */
+        @media (max-width: 390px) {
+            .video-background video {
+                min-width: 50%;
+                height: 50%;
+                object-position: center; /* Centraliza o vídeo */
+            }
+
+            .video-background {
+                flex-direction: column; /* Vídeos um abaixo do outro */
+            }
+
+            #initial-message {
+                font-size: 1.8em;
+                padding: 20px;
+            }
+
+            .menu-container {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+
+            .menu-container h2 {
+                font-size: 1.5em;
+            }
+
+            .menu-container h3 {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-background">
+        <video id="video1" autoplay loop muted></video>
+        <video id="video2" autoplay loop muted></video>
+    </div>
+
+    <div id="initial-message">
+        Feliz Dia dos Namorados!
+    </div>
+
+    <div id="menu-card" class="menu-container">
+        <h2>CARDÁPIO</h2>
+
+        <h3>ENTRADA</h3>
+        <ul>
+            <li>Bruschetta com ricota ao pesto e tomates confitados</li>
+            <li>Mini tábua de frios</li>
+        </ul>
+
+        <h3>PRATO PRINCIPAL</h3>
+        <ul>
+            <li>a definir</li>
+        </ul>
+
+        <h3>BEBIDAS</h3>
+        <ul>
+            <li>Água sem gás</li>
+            <li>Suco de uva</li>
+            <li>Água de côco</li>
+            <li>Cerveja estupidamente gelada</li>
+        </ul>
+
+        <h3>SOBREMESAS</h3>
+        <ul>
+            <li>Coxinha de brigadeiro com morango</li>
+            <li>Goiabada com queijo</li>
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const initialMessage = document.getElementById('initial-message');
+            const menuCard = document.getElementById('menu-card');
+            const video1 = document.getElementById('video1');
+            const video2 = document.getElementById('video2');
+
+            // Configura o caminho dos seus vídeos aqui
+            // Exemplo: video1.src = 'caminho/do/seu/video1.mp4';
+            // Certifique-se de que os vídeos estejam na mesma pasta do arquivo HTML ou forneça o caminho completo
+            // Por enquanto, deixarei em branco para você preencher
+            video1.src = 'VID-20250611-WA0042.mp4';
+            video2.src = 'VID-20250611-WA0043.mp4';
+
+            // Para garantir que o áudio toque, se for o caso
+            // Se você quiser o som dos vídeos, remova 'muted' do HTML e adicione:
+            // video1.muted = false;
+            // video2.muted = false;
+
+            // Mostra a mensagem inicial por 5 segundos
+            setTimeout(() => {
+                initialMessage.style.opacity = '0';
+                setTimeout(() => {
+                    initialMessage.style.display = 'none'; // Esconde a mensagem
+                    menuCard.classList.add('show'); // Mostra o cardápio
+                }, 1000); // Tempo para a transição de opacidade da mensagem inicial
+            }, 5000); // 5 segundos para a mensagem inicial
+        });
+    </script>
+</body>
+</html>
