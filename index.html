@@ -146,7 +146,6 @@
         <h3>ENTRADA</h3>
         <ul>
             <li>Bruschetta com ricota ao pesto e tomates confitados</li>
-            <li>Minitábua de frios</li>
         </ul>
 
         <h3>PRATO PRINCIPAL</h3>
@@ -188,14 +187,19 @@
             // video1.muted = false;
             // video2.muted = false;
 
-            // Mostra a mensagem inicial por 5 segundos
             setTimeout(() => {
                 initialMessage.style.opacity = '0';
                 setTimeout(() => {
                     initialMessage.style.display = 'none'; // Esconde a mensagem
                     menuCard.classList.add('show'); // Mostra o cardápio
-                }, 1000); // Tempo para a transição de opacidade da mensagem inicial
-            }, 5000); // 5 segundos para a mensagem inicial
+                    setTimeout(() => {
+                        menuCard.style.opacity = '0'; // Inicia o fade out do menuCard
+                        setTimeout(() => {
+                            menuCard.style.display = 'none'; // Esconde o menuCard completamente após o fade out
+                        }, 4000); // Tempo para o fade out (4 segundos)
+                    }, 60000); // 1 minuto em milissegundos
+                }, 3000); // Tempo para a transição de opacidade da mensagem inicial
+            }, 7000); // 7 segundos para a mensagem inicial
         });
     </script>
 </body>
